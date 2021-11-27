@@ -1,0 +1,39 @@
+musicshop=> create table if not exists Genre (
+musicshop(> genre_id serial primary key,
+musicshop(> name_genre varchar(20) not null);
+CREATE TABLE
+musicshop=> create table if not exists Artist(
+musicshop(> artist_id serial primary key,
+musicshop(> name_artist varchar(20));
+CREATE TABLE
+musicshop=> create table if not exists GenreArtist(
+musicshop(> id serial primary key,
+musicshop(> genre integer references Genre(genre_id),
+musicshop(> artist integer references Artist(artist_id));
+CREATE TABLE
+musicshop=> create table if not exists Album(
+musicshop(> album_id serial primary key,
+musicshop(> year integer not null,
+musicshop(> rate numeric(3,2) check(rate>0));
+CREATE TABLE
+musicshop=> create table if not exists AlbumArtist(
+musicshop(> id serial primary key,
+musicshop(> artist integer references Artist(artist_id),
+musicshop(> album integer references Album(album_id));
+CREATE TABLE
+musicshop=> create table if not exists Track(
+musicshop(> track_id serial primary key,
+musicshop(> duration numeric(3,2) not null,
+musicshop(> artist integer references Artist(artist_id),
+musicshop(> album integer references Album(album_id));
+CREATE TABLE
+musicshop=> create table if not exists Mixtape(
+musicshop(> id serial primary key,
+musicshop(> name varchar(20) not null,
+musicshop(> year integer not null);
+CREATE TABLE
+musicshop=> create table if not exists MixTrack(
+musicshop(> id serial primary key,
+musicshop(> track integer references Track(track_id),
+musicshop(> mixtape integer references Mixtape(id));
+CREATE TABLE
